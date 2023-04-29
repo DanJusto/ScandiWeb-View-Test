@@ -138,7 +138,7 @@ export default function Create() {
         </div>
       </Header>
       <main>
-        <Form id="addForm" >
+        <Form id="product_form" >
           <div className="input-wrap">
             <label htmlFor="sku">SKU</label>
             <input id="sku" type="text" placeholder="SKU123456" required onChange={e => setSku(e.target.value)}/>
