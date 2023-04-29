@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container } from "./style";
-import { Item } from "../../components/Item";
+import { Container, Item } from "./style";
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
@@ -9,6 +8,15 @@ import { Footer } from "../../components/Footer";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+
+  function checkType(product) {
+    const arrIndex = ['dvd', 'book', 'furniture'];
+    const index = arrIndex.indexOf(product.type);
+    const arrExt = ['MB', 'KG', ''];
+    const arrName = ['Size: ', 'Weight: ', 'Dimension: '];
+    const attribute = arrName[index] + product.attribute + arrExt[index];
+    return attribute;
+  }
 
   const navigate = useNavigate();
 
@@ -63,9 +71,22 @@ export default function Home() {
       <main>
         <div className="section">
           {
-            products.map(product => (
-              <Item product={product} key={product.id}/>
-            ))
+            products.map(product => {
+              const attribute = checkType(product);
+              return (
+                <Item key={product.id}>
+                  <input 
+                  className="delete-checkbox" 
+                  type="checkbox"
+                  idfordelete={product.id}
+                  />
+                  <p>{product.sku}</p>
+                  <p>{product.name}</p>
+                  <p>{product.price} $</p>
+                  <p>{attribute}</p>
+                </Item>
+              )
+            })
           }
         </div>
       </main>

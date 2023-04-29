@@ -21,7 +21,7 @@ export default function Create() {
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
   const [length, setLength] = useState('');
-
+  
   function navigateToHome() {
     navigate("/");
   }
@@ -65,17 +65,17 @@ export default function Create() {
       return;
     }
 
-    setSku(sku.toUpperCase());
+    const checkSku = sku.toUpperCase();
     let products;
 
-    await fetch("https://scandiweb-api.cloud")
+    fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         products = JSON.parse(responseJson.body)
       }).then(() => {
         let counter = 0;
         products.forEach(product => {
-          if (sku === product.sku) {
+          if (checkSku === product.sku) {
             counter++;
           }
         })
@@ -87,19 +87,24 @@ export default function Create() {
       });
   }
   async function handleNewProduct() {
+    let attr = attribute
 
     if (attribute === '') {
       const array = [height, width, length];
-      setAttribute(array.join('x'));
+      attr = array.join('x');
     }
 
+    const upperSku = sku.toUpperCase();
+
     const newProduct = {
-      sku,
+      sku: upperSku,
       name,
       type: type.toString(),
       price,
-      attribute
+      attribute: attr
     };
+
+    console.log(newProduct)
 
     await fetch("https://scandiweb-api.cloud", {
       method: 'POST',
@@ -155,7 +160,7 @@ export default function Create() {
             <label htmlFor="type">Type Switcher</label>
             <select id="productType" defaultValue={"default"} required onChange={e => setType(e.target.value)}>
               <option value="" >Select type</option>
-              <option id="dvd" value="0">DVD-disc</option>
+              <option id="DVD" value="0">DVD</option>
               <option id="book" value="1">Book</option>
               <option id="furniture" value="2">Furniture</option>
             </select>
