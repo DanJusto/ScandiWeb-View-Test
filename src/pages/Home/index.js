@@ -56,8 +56,8 @@ export default function Home() {
       <Header className='header'>
         <h1>Product List</h1>
         <div className="buttons">
-          <Button id="add-product-btn" title="Add" onClick={navigateToAdd} ></Button>
-          <Button id="delete-product-btn" title="Mass Delete" onClick={handleMassDelete} ></Button>
+          <Button id="add-product-btn" title="ADD" onClick={navigateToAdd} ></Button>
+          <Button id="delete-product-btn" title="MASS DELETE" onClick={handleMassDelete} ></Button>
         </div>
       </Header>
       <main>
