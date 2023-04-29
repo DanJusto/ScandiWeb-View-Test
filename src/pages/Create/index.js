@@ -68,7 +68,7 @@ export default function Create() {
     setSku(sku.toUpperCase());
     let products;
 
-    await fetch("http://scandiweb-api.cloud")
+    await fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         products = JSON.parse(responseJson.body)
@@ -101,7 +101,7 @@ export default function Create() {
       attribute
     };
 
-    await fetch("http://scandiweb-api.cloud", {
+    await fetch("https://scandiweb-api.cloud", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -25,7 +25,7 @@ export default function Home() {
       ids.push(checked.getAttribute("idfordelete"))
     })
 
-    await fetch("http://scandiweb-api.cloud", {
+    await fetch("https://scandiweb-api.cloud", {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchProducts() {
-      await fetch("http://scandiweb-api.cloud")
+      await fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         setProducts(JSON.parse(responseJson.body))
