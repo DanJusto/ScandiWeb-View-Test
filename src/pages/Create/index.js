@@ -118,7 +118,7 @@ export default function Create() {
         console.log(responseJson)
       });
 
-    navigateToHome();
+    navigate(-1);
   }
 
   useEffect(() => {
