@@ -87,19 +87,21 @@ export default function Home() {
     }
     reload();
   }
+  
+  let success = false;
 
   useEffect(() => {
+    success = false;
     async function fetchProducts() {
       await fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
-        setProducts(JSON.parse(responseJson.body))
+        setProducts(JSON.parse(responseJson.body));
+        success = true;
       })
     };
     fetchProducts();
-  }, []);
-
-  useEffect(() => listProducts(products), [products])
+  }, [navigate]);
 
   return (
     <Container>
@@ -112,7 +114,24 @@ export default function Home() {
       </Header>
       <main>
         <div className="section">
-        
+        {
+          products.map(product => {
+            const attribute = checkType(product);
+            return (
+              <Item key={product.id}>
+                <input 
+                  className="delete-checkbox" 
+                  type="checkbox"
+                  idfordelete={product.id}
+                />
+                <p>{product.sku}</p>
+                <p>{product.name}</p>
+                <p>{product.price} $</p>
+                <p>{attribute}</p>
+              </Item>
+            )
+          })
+        }
         </div>
       </main>
       <Footer />
