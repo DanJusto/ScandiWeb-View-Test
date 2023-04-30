@@ -119,6 +119,12 @@ export default function Create() {
       });
 
     navigateToHome();
+    
+    function reload(){
+      window.location.reload();
+    }
+
+    reload();
   }
 
   useEffect(() => {
