@@ -7,7 +7,19 @@ import { Footer } from "../../components/Footer";
 
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
+  let products = [];
+
+  
+  requestData().then(() => listProducts(products));
+
+
+  async function requestData() {
+    await fetch("https://scandiweb-api.cloud")
+      .then((response) => response.json())
+      .then((responseJson) => {
+        products = JSON.parse(responseJson.body)
+      })
+  }
 
   function checkType(product) {
     const arrIndex = ['dvd', 'book', 'furniture'];
@@ -49,7 +61,7 @@ export default function Home() {
     sku.innerHTML = product.sku;
     name.innerHTML = product.name;
     price.innerHTML = product.price;
-    attribute.innerHTML = product.attribute;
+    attribute.innerHTML = checkType(product);
 
     item.appendChild(checkbox);
     item.appendChild(sku);
@@ -90,7 +102,7 @@ export default function Home() {
     reload();
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function fetchProducts() {
       await fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
@@ -103,7 +115,7 @@ export default function Home() {
 
   useEffect(() => {
     listProducts(products)
-  }, [products]);
+  }, [products]);*/
 
   return (
     <Container>
