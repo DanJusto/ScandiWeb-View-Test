@@ -40,7 +40,7 @@ export default function Home() {
         return;
     }
 
-    await fetch("https://scandiweb-api.cloud", {
+    fetch("https://scandiweb-api.cloud", {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchProducts() {
-      await fetch("https://scandiweb-api.cloud")
+      fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         setProducts(JSON.parse(responseJson.body))
@@ -87,7 +87,7 @@ export default function Home() {
                   idfordelete={product.id}
                   />
                   <p>{product.sku}</p>
-                  <p id={product.name}>{product.name}</p>
+                  <p>{product.name}</p>
                   <p>{product.price} $</p>
                   <p>{attribute}</p>
                 </Item>

@@ -68,7 +68,7 @@ export default function Create() {
     const checkSku = sku.toUpperCase();
     let products;
 
-    await fetch("https://scandiweb-api.cloud")
+    fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         products = JSON.parse(responseJson.body)
@@ -106,7 +106,7 @@ export default function Create() {
 
     console.log(newProduct)
 
-    await fetch("https://scandiweb-api.cloud", {
+    fetch("https://scandiweb-api.cloud", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
