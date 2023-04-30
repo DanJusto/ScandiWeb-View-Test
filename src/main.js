@@ -9,9 +9,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
       <ThemeProvider theme={theme}>
         <GlobalStyles/>
-        <body>
-          <Router/>
-        </body>
+        <Router/>
       </ThemeProvider>
     </React.StrictMode>,
 );

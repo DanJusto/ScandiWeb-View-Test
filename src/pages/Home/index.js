@@ -28,14 +28,12 @@ export default function Home() {
     let section = document.querySelector('.section');
     products.forEach(product => {
       let item = createItem(product);
-      console.log(item);
       section.appendChild(item);
     })
   }
 
   function createItem(product) {
     let item = document.createElement('div')
-    console.log(item);
     item.setAttribute("class", "item");
     let checkbox = document.createElement('input');
     checkbox.setAttribute("type", "checkbox");
@@ -101,6 +99,8 @@ export default function Home() {
     fetchProducts();
   }, []);
 
+  useEffect(() => listProducts(products), [products])
+
   return (
     <Container>
       <Header className='header'>
@@ -112,24 +112,7 @@ export default function Home() {
       </Header>
       <main>
         <div className="section">
-        {
-          products.map(product => {
-            const attribute = checkType(product);
-            return (
-              <Item key={product.id}>
-                <input 
-                  className="delete-checkbox" 
-                  type="checkbox"
-                  idfordelete={product.id}
-                />
-                <p>{product.sku}</p>
-                <p>{product.name}</p>
-                <p>{product.price} $</p>
-                <p>{attribute}</p>
-              </Item>
-            )
-          })
-        }
+        
         </div>
       </main>
       <Footer />
