@@ -55,16 +55,14 @@ export default function Home() {
   }
 
   useEffect(() => {
-    document.addEventListener("DOMContentLoaded", () => {
-      async function fetchProducts() {
-        await fetch("https://scandiweb-api.cloud")
-        .then((response) => response.json())
-        .then((responseJson) => {
-          setProducts(JSON.parse(responseJson.body))
-        })
-      };
-      fetchProducts();
-    })
+    async function fetchProducts() {
+      await fetch("https://scandiweb-api.cloud")
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setProducts(JSON.parse(responseJson.body))
+      })  
+    };
+    fetchProducts();
   }, [])
 
   return (
