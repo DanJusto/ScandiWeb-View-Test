@@ -27,13 +27,20 @@ export default function Home() {
   async function handleMassDelete() {
     const ids = [];
 
-    const deleteList = document.querySelectorAll("input[type=checkbox]:checked");
+    const itens = document.getElementsByClassName("delete-checkbox");
 
-    deleteList.forEach(checked => {
-      ids.push(checked.getAttribute("idfordelete"))
-    })
+    for(let i = 0; i < itens.length; i++) {
+      if(itens[i].checked) {
+        ids.push(itens[i].getAttribute("idfordelete"))
+      }
+    }
+    
+  if (ids.length <= 0) {
+      alert("Need select the products to delete");
+      return;
+  }
 
-    await fetch("https://scandiweb-api.cloud", {
+    fetch("https://scandiweb-api.cloud", {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
