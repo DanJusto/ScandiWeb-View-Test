@@ -24,7 +24,43 @@ export default function Home() {
     navigate("/add");
   }
 
-  function handleMassDelete() {
+  function listProducts(products) {
+    let section = document.querySelector('.section');
+    products.forEach(product => {
+      let item = createItem(product);
+      console.log(item);
+      section.appendChild(item);
+    })
+  }
+
+  function createItem(product) {
+    let item = document.createElement('div')
+    console.log(item);
+    item.setAttribute("class", "item");
+    let checkbox = document.createElement('input');
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("class", "delete-checkbox");
+    checkbox.setAttribute("idfordelete", product.id);
+    let sku = document.createElement('p');
+    let name = document.createElement('p');
+    let price = document.createElement('p');
+    let attribute = document.createElement('p');
+
+    sku.innerHTML = product.sku;
+    name.innerHTML = product.name;
+    price.innerHTML = product.price;
+    attribute.innerHTML = product.attribute;
+
+    item.appendChild(checkbox);
+    item.appendChild(sku);
+    item.appendChild(name);
+    item.appendChild(price);
+    item.appendChild(attribute);
+
+    return item;
+  }
+
+  async function handleMassDelete() {
     const ids = [];
 
     const itens = document.getElementsByClassName("delete-checkbox");
@@ -56,14 +92,18 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchProducts() {
-      fetch("https://scandiweb-api.cloud")
+      await fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         setProducts(JSON.parse(responseJson.body))
-      })  
+      })
     };
     fetchProducts();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    listProducts(products)
+  }, [products]);
 
   return (
     <Container>
@@ -76,7 +116,17 @@ export default function Home() {
       </Header>
       <main>
         <div className="section">
-          {
+          
+        </div>
+      </main>
+      <Footer />
+    </Container>
+  );
+}
+
+
+/*
+{
             products.map(product => {
               const attribute = checkType(product);
               return (
@@ -94,9 +144,4 @@ export default function Home() {
               )
             })
           }
-        </div>
-      </main>
-      <Footer />
-    </Container>
-  );
-}
+  */
