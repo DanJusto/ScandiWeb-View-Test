@@ -18,13 +18,15 @@ export default function Home() {
     return attribute;
   }
 
+  window.addEventListener('popstate', () => (window.location.reload()));
+
   const navigate = useNavigate();
 
   function navigateToAdd() {
     navigate("/add");
   }
 
-  function listProducts(products) {
+  /*function listProducts(products) {
     let section = document.querySelector('.section');
     products.forEach(product => {
       let item = createItem(product);
@@ -56,7 +58,7 @@ export default function Home() {
     item.appendChild(attribute);
 
     return item;
-  }
+  }*/
 
   async function handleMassDelete() {
     const ids = [];
@@ -87,21 +89,17 @@ export default function Home() {
     }
     reload();
   }
-  
-  let success = false;
 
   useEffect(() => {
-    success = false;
     async function fetchProducts() {
       await fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         setProducts(JSON.parse(responseJson.body));
-        success = true;
       })
     };
     fetchProducts();
-  }, [navigate]);
+  }, []);
 
   return (
     <Container>

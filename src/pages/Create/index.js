@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Container, Form } from "./style";
 import { Header } from "../../components/Header";
@@ -22,8 +22,8 @@ export default function Create() {
   const [width, setWidth] = useState('');
   const [length, setLength] = useState('');
   
-  function navigateToHome() {
-    navigate("/");
+  function returnToHome() {
+    navigate(-1);
   }
 
   const setatt = (data) => {
@@ -115,9 +115,12 @@ export default function Create() {
       .then((responseJson) => {
         console.log(responseJson)
       });
-
-    navigateToHome();
-    window.location.reload();
+    
+    function redirectToHome() { 
+      window.history.pushState('Success', '/', '/');;
+      navigate("/");
+    }
+    redirectToHome();
   }
 
   useEffect(() => {
@@ -138,7 +141,7 @@ export default function Create() {
         <h1>Product Add</h1>
         <div className="buttons">
           <Button id="save-product-btn" title="Save" onClick={validate}></Button>
-          <Button id="cancel-btn" title="Cancel" onClick={navigateToHome}></Button>
+          <Button id="cancel-btn" title="Cancel" onClick={returnToHome}></Button>
         </div>
       </Header>
       <main>
