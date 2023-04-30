@@ -18,7 +18,9 @@ export default function Home() {
     return attribute;
   }
 
-  window.addEventListener('popstate', () => (window.location.reload()));
+  window.addEventListener('popstate', e => {
+    console.log('deu certo');
+  });
 
   const navigate = useNavigate();
 

@@ -117,7 +117,7 @@ export default function Create() {
       });
     
     function redirectToHome() { 
-      window.history.pushState('Success', '/', '/');;
+      window.history.back();
       navigate("/");
     }
     redirectToHome();
