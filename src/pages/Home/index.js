@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   window.addEventListener('popstate', e => {
-    console.log('deu certo');
+    window.location.reload();
   });
 
   const navigate = useNavigate();
