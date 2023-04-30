@@ -5,7 +5,7 @@ import theme from "./styles/theme";
 import GlobalStyles from "./styles/global";
 import { Router } from "./router.js";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("body")).render(
     <React.StrictMode>
       <ThemeProvider theme={theme}>
         <GlobalStyles/>

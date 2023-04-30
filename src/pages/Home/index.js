@@ -7,19 +7,7 @@ import { Footer } from "../../components/Footer";
 
 
 export default function Home() {
-  let products = [];
-
-  
-  requestData().then(() => listProducts(products));
-
-
-  async function requestData() {
-    await fetch("https://scandiweb-api.cloud")
-      .then((response) => response.json())
-      .then((responseJson) => {
-        products = JSON.parse(responseJson.body)
-      })
-  }
+  const [products, setProducts] = useState([]);
 
   function checkType(product) {
     const arrIndex = ['dvd', 'book', 'furniture'];
@@ -102,7 +90,7 @@ export default function Home() {
     reload();
   }
 
-  /*useEffect(() => {
+  useEffect(() => {
     async function fetchProducts() {
       await fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
@@ -112,10 +100,6 @@ export default function Home() {
     };
     fetchProducts();
   }, []);
-
-  useEffect(() => {
-    listProducts(products)
-  }, [products]);*/
 
   return (
     <Container>
@@ -128,7 +112,24 @@ export default function Home() {
       </Header>
       <main>
         <div className="section">
-          
+        {
+          products.map(product => {
+            const attribute = checkType(product);
+            return (
+              <Item key={product.id}>
+                <input 
+                  className="delete-checkbox" 
+                  type="checkbox"
+                  idfordelete={product.id}
+                />
+                <p>{product.sku}</p>
+                <p>{product.name}</p>
+                <p>{product.price} $</p>
+                <p>{attribute}</p>
+              </Item>
+            )
+          })
+        }
         </div>
       </main>
       <Footer />
