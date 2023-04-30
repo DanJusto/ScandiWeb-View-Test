@@ -24,7 +24,7 @@ export default function Home() {
     navigate("/add");
   }
 
-  async function handleMassDelete() {
+  function handleMassDelete() {
     const ids = [];
 
     const itens = document.getElementsByClassName("delete-checkbox");
@@ -48,10 +48,10 @@ export default function Home() {
       body: JSON.stringify(ids)
     });
 
-    function refreshPage(){ 
+    function reload(){ 
       window.location.reload(); 
     }
-    refreshPage();
+    reload();
   }
 
   useEffect(() => {

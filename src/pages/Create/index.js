@@ -104,19 +104,13 @@ export default function Create() {
       attribute: attr
     };
 
-    console.log(newProduct)
-
     fetch("https://scandiweb-api.cloud", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(newProduct)
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson)
-      });
+    });
 
     navigateToHome();
   }
