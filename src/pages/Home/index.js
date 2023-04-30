@@ -88,7 +88,7 @@ export default function Home() {
                   idfordelete={product.id}
                   />
                   <p>{product.sku}</p>
-                  <p>{product.name}</p>
+                  <p id={product.name}>{product.name}</p>
                   <p>{product.price} $</p>
                   <p>{attribute}</p>
                 </Item>
