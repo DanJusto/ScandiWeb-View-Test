@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, redirect} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Container, Form } from "./style";
 import { Header } from "../../components/Header";
@@ -23,7 +23,7 @@ export default function Create() {
   const [length, setLength] = useState('');
   
   function returnToHome() {
-    navigate(-1);
+    navigate("/");
   }
 
   const setatt = (data) => {
@@ -116,11 +116,7 @@ export default function Create() {
         console.log(responseJson)
       });
     
-    function redirectToHome() { 
-      window.history.back();
-      navigate("/");
-    }
-    redirectToHome();
+    navigate("/");
   }
 
   useEffect(() => {
