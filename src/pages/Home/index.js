@@ -48,11 +48,7 @@ export default function Home() {
       body: JSON.stringify(ids)
     });
 
-    function reload(){
-      window.location.reload();
-    }
-
-    reload();
+    window.location.reload();
   }
 
   useEffect(() => {

@@ -5,11 +5,13 @@ import theme from "./styles/theme";
 import GlobalStyles from "./styles/global";
 import { Router } from "./router.js";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles/>
-      <Router/>
-    </ThemeProvider>
-  </React.StrictMode>,
-)
+document.addEventListener('DOMContentLoaded', () => {
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles/>
+        <Router/>
+      </ThemeProvider>
+    </React.StrictMode>,
+  )
+});
