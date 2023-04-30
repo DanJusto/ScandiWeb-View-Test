@@ -68,7 +68,7 @@ export default function Create() {
     const checkSku = sku.toUpperCase();
     let products;
 
-    fetch("https://scandiweb-api.cloud")
+    await fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         products = JSON.parse(responseJson.body)

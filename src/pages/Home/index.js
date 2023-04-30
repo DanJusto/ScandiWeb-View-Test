@@ -35,12 +35,12 @@ export default function Home() {
       }
     }
     
-  if (ids.length <= 0) {
-      alert("Need select the products to delete");
-      return;
-  }
+    if (ids.length <= 0) {
+        alert("Need select the products to delete");
+        return;
+    }
 
-    fetch("https://scandiweb-api.cloud", {
+    await fetch("https://scandiweb-api.cloud", {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -48,18 +48,23 @@ export default function Home() {
       body: JSON.stringify(ids)
     });
 
-    window.location.reload();
+    function refreshPage(){ 
+      window.location.reload(); 
+    }
+    refreshPage();
   }
 
   useEffect(() => {
-    async function fetchProducts() {
-      fetch("https://scandiweb-api.cloud")
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setProducts(JSON.parse(responseJson.body))
-      })
-    };
-    fetchProducts();
+    document.addEventListener("DOMContentLoaded", () => {
+      async function fetchProducts() {
+        await fetch("https://scandiweb-api.cloud")
+        .then((response) => response.json())
+        .then((responseJson) => {
+          setProducts(JSON.parse(responseJson.body))
+        })
+      };
+      fetchProducts();
+    })
   }, [])
 
   return (
