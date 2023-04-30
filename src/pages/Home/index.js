@@ -8,6 +8,7 @@ import { Footer } from "../../components/Footer";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   function checkType(product) {
     const arrIndex = ['dvd', 'book', 'furniture'];
@@ -19,7 +20,10 @@ export default function Home() {
   }
 
   window.addEventListener('popstate', e => {
-    window.location.reload();
+    function reload(){ 
+      window.location.reload(); 
+    }
+    reload();
   });
 
   const navigate = useNavigate();
@@ -98,6 +102,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((responseJson) => {
         setProducts(JSON.parse(responseJson.body));
+        setIsLoading(false);
       })
     };
     fetchProducts();
@@ -114,7 +119,9 @@ export default function Home() {
       </Header>
       <main>
         <div className="section">
-        {
+        {isLoading ? (
+          <div/>
+        ) : (
           products.map(product => {
             const attribute = checkType(product);
             return (
@@ -131,6 +138,7 @@ export default function Home() {
               </Item>
             )
           })
+        )
         }
         </div>
       </main>
