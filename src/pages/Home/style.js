@@ -35,7 +35,7 @@ export const Container = styled.div`
             flex-wrap: wrap;
             justify-content: center;
 
-            /*.item {
+            .item {
                 position: relative;
                 display: flex;
                 flex-direction: column;
@@ -60,7 +60,7 @@ export const Container = styled.div`
                     font-size: 1.2rem;
                     text-align: center;
                 }
-            }*/
+            }
         }
     }
 
@@ -86,7 +86,7 @@ export const Container = styled.div`
             .section {
                 gap: 1rem;
 
-                /*.item {
+                .item {
                     width: 17rem;
                     height: 17rem;
 
@@ -99,7 +99,7 @@ export const Container = styled.div`
                     > p {
                         font-size: 1.4rem;
                     }
-                }*/
+                }
             }
         }
     }
@@ -126,7 +126,7 @@ export const Container = styled.div`
             .section {
                 gap: 1.2rem;
 
-                /*.item {
+                .item {
                     width: 20rem;
                     height: 20rem;
 
@@ -139,13 +139,13 @@ export const Container = styled.div`
                     > p {
                         font-size: 1.6rem;
                     }
-                }*/
+                }
             }
         }
     }
 `
 
-export const Item = styled.div`
+/*export const Item = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
@@ -200,4 +200,4 @@ export const Item = styled.div`
             font-size: 1.6rem;
         }
     }
-`;
+`;*/

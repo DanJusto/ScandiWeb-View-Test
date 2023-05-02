@@ -9,29 +9,21 @@ import { Footer } from "../../components/Footer";
 export default function Home() {
   const [products, setProducts] = useState([]);
 
-  function checkType(product) {
-    const arrIndex = ['dvd', 'book', 'furniture'];
-    const index = arrIndex.indexOf(product.type);
-    const arrExt = ['MB', 'KG', ''];
-    const arrName = ['Size: ', 'Weight: ', 'Dimension: '];
-    const attribute = arrName[index] + product.attribute + arrExt[index];
-    return attribute;
-  }
-
   const navigate = useNavigate();
-
+  
   function navigateToAdd() {
     navigate("/add");
   }
-
-  /*function listProducts(products) {
+  
+  function listProducts(products) {
     let section = document.querySelector('.section');
-    products.forEach(product => {
-      let item = createItem(product);
+    for(let i = 0; i < products.length; i++) {
+      let item = createItem(products[i]);
       section.appendChild(item);
-    })
+      i++;
+    }
   }
-
+  
   function createItem(product) {
     let item = document.createElement('div')
     item.setAttribute("class", "item");
@@ -40,23 +32,36 @@ export default function Home() {
     checkbox.setAttribute("class", "delete-checkbox");
     checkbox.setAttribute("idfordelete", product.id);
     let sku = document.createElement('p');
+    sku.setAttribute("class", "sku");
     let name = document.createElement('p');
+    name.setAttribute("class", "name");
     let price = document.createElement('p');
+    price.setAttribute("class", "price");
     let attribute = document.createElement('p');
-
+    attribute.setAttribute("class", "attribute");
+    
     sku.innerHTML = product.sku;
     name.innerHTML = product.name;
     price.innerHTML = product.price;
     attribute.innerHTML = checkType(product);
-
+    
     item.appendChild(checkbox);
     item.appendChild(sku);
     item.appendChild(name);
     item.appendChild(price);
     item.appendChild(attribute);
-
+    
     return item;
-  }*/
+  }
+
+  function checkType(product) {
+    const arrIndex = ['dvd', 'book', 'furniture'];
+    const index = arrIndex.indexOf(product.type);
+    const arrExt = ['MB', 'KG', ''];
+    const arrName = ['Size: ', 'Weight: ', 'Dimension: '];
+    const attribute = arrName[index] + product.attribute + arrExt[index];
+    return attribute;
+  }
 
   async function handleMassDelete() {
     const ids = [];
@@ -94,10 +99,13 @@ export default function Home() {
       .then((response) => response.json())
       .then((responseJson) => {
         setProducts(JSON.parse(responseJson.body));
+        
       })
     };
     fetchProducts();
   }, []);
+
+  useEffect(() => listProducts(products), [products]);
 
   return (
     <Container>
@@ -110,24 +118,7 @@ export default function Home() {
       </Header>
       <main>
         <div className="section">
-        {
-          products.map(product => {
-            const attribute = checkType(product);
-            return (
-              <Item key={product.id}>
-                <input 
-                  className="delete-checkbox" 
-                  type="checkbox"
-                  idfordelete={product.id}
-                />
-                <p>{product.sku}</p>
-                <p>{product.name}</p>
-                <p>{product.price} $</p>
-                <p>{attribute}</p>
-              </Item>
-            )
-          })
-        }
+        
         </div>
       </main>
       <Footer />
