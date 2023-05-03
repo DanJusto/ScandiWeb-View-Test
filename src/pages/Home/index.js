@@ -18,6 +18,7 @@ export default function Home({prods}) {
   
   window.addEventListener('popstate', e => {
     setProducts(prods);
+    window.location.reload();
   })
   
   /*function listProducts(products) {
