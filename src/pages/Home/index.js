@@ -18,42 +18,7 @@ export default function Home({prods}) {
   
   window.addEventListener('popstate', e => {
     setProducts(prods);
-    window.location.reload();
   })
-  
-  /*function listProducts(products) {
-    let section = document.querySelector('.section');
-    products.forEach(product => {
-      let item = createItem(product);
-      section.appendChild(item);
-    })
-  }
-
-  function createItem(product) {
-    let item = document.createElement('div')
-    item.setAttribute("class", "item");
-    let checkbox = document.createElement('input');
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("class", "delete-checkbox");
-    checkbox.setAttribute("idfordelete", product.id);
-    let sku = document.createElement('p');
-    let name = document.createElement('p');
-    let price = document.createElement('p');
-    let attribute = document.createElement('p');
-
-    sku.innerHTML = product.sku;
-    name.innerHTML = product.name;
-    price.innerHTML = product.price;
-    attribute.innerHTML = checkType(product);
-
-    item.appendChild(checkbox);
-    item.appendChild(sku);
-    item.appendChild(name);
-    item.appendChild(price);
-    item.appendChild(attribute);
-
-    return item;
-  }*/
 
   function checkType(product) {
     const arrIndex = ['dvd', 'book', 'furniture'];
@@ -93,13 +58,6 @@ export default function Home({prods}) {
     }
     reload();
   }
-
-  /*window.addEventListener('load', async () => {
-    const response = await api.get(`/`);
-    console.log(response)
-    const listProds = JSON.parse(response.data.body);
-    listProducts(listProds);
-  });*/
 
   useEffect(() => {
     async function fetchProducts() {

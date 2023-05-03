@@ -83,23 +83,6 @@ export default function Create({ setProds }) {
       handleNewProduct()
     }
 
-    /*fetch("https://scandiweb-api.cloud")
-      .then((response) => response.json())
-      .then((responseJson) => {
-        products = JSON.parse(responseJson.body)
-      }).then(() => {
-        let counter = 0;
-        products.forEach(product => {
-          if (checkSku === product.sku) {
-            counter++;
-          }
-        })
-        if(counter > 0) {
-          alert("This SKU is already in use");
-        } else {
-          handleNewProduct()
-        }
-      });*/
   }
   async function handleNewProduct() {
     let attr = attribute
