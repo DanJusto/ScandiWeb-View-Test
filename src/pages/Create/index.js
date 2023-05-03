@@ -43,47 +43,6 @@ export default function Create({ setProds }) {
     setLength(data);
   }
 
-  async function validate () {
-    const message = "All values are required";
-    const positiveMessage = "The value must be positive";
-    if (sku === '' || name === '' || type === '' || price === '') {
-      alert(message);
-      return;
-    }
-
-    if (attribute === '') {
-      if (height < 0 || width < 0 || length < 0) {
-        alert(positiveMessage);
-        return
-      } else if (height === '' || width === '' || length === '') {
-        alert(message);
-        return
-      }
-    }
-
-    if (attribute < 0 || price < 0) {
-      alert(positiveMessage);
-      return;
-    }
-
-    const checkSku = sku.toUpperCase();
-
-    let products;
-    const response = await api.get(`/`);
-    products = JSON.parse(response.data.body);
-    let counter = 0;
-    products.forEach(product => {
-      if (checkSku === product.sku) {
-        counter++;
-      }
-    })
-    if(counter > 0) {
-      alert("This SKU is already in use");
-    } else {
-      handleNewProduct()
-    }
-
-  }
   async function handleNewProduct() {
     let attr = attribute
 
@@ -123,6 +82,47 @@ export default function Create({ setProds }) {
       navigate("/");
     }
     backToHome();
+  }
+
+  async function validate () {
+    const message = "All values are required";
+    const positiveMessage = "The value must be positive";
+    if (sku === '' || name === '' || type === '' || price === '') {
+      alert(message);
+      return;
+    }
+
+    if (attribute === '') {
+      if (height < 0 || width < 0 || length < 0) {
+        alert(positiveMessage);
+        return
+      } else if (height === '' || width === '' || length === '') {
+        alert(message);
+        return
+      }
+    }
+
+    if (attribute < 0 || price < 0) {
+      alert(positiveMessage);
+      return;
+    }
+
+    const checkSku = sku.toUpperCase();
+
+    let products;
+    const response = await api.get(`/`);
+    products = JSON.parse(response.data.body);
+    let counter = 0;
+    products.forEach(product => {
+      if (checkSku === product.sku) {
+        counter++;
+      }
+    })
+    if(counter > 0) {
+      alert("This SKU is already in use");
+    } else {
+      handleNewProduct()
+    }
   }
 
   useEffect(() => {

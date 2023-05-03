@@ -16,19 +16,6 @@ export default function Home({prods}) {
     navigate("/add");
   }
   
-  window.addEventListener('popstate', e => {
-    setProducts(prods);
-  })
-
-  function checkType(product) {
-    const arrIndex = ['dvd', 'book', 'furniture'];
-    const index = arrIndex.indexOf(product.type);
-    const arrExt = ['MB', 'KG', ''];
-    const arrName = ['Size: ', 'Weight: ', 'Dimension: '];
-    const attribute = arrName[index] + product.attribute + arrExt[index];
-    return attribute;
-  }
-
   async function handleMassDelete() {
     const ids = [];
 
@@ -59,6 +46,19 @@ export default function Home({prods}) {
     reload();
   }
 
+  window.addEventListener('popstate', e => {
+    setProducts(prods);
+  })
+
+  function checkType(product) {
+    const arrIndex = ['dvd', 'book', 'furniture'];
+    const index = arrIndex.indexOf(product.type);
+    const arrExt = ['MB', 'KG', ''];
+    const arrName = ['Size: ', 'Weight: ', 'Dimension: '];
+    const attribute = arrName[index] + product.attribute + arrExt[index];
+    return attribute;
+  }
+  
   useEffect(() => {
     async function fetchProducts() {
       const response = await api.get(`/`)
@@ -68,8 +68,7 @@ export default function Home({prods}) {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    
+  useEffect(() => {  
   }, [products])
 
   return (
