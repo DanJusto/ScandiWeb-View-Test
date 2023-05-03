@@ -6,10 +6,10 @@ import GlobalStyles from "./styles/global";
 import { Router } from "./router.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
+    <React.Fragment>
       <ThemeProvider theme={theme}>
         <GlobalStyles/>
         <Router/>
       </ThemeProvider>
-    </React.StrictMode>,
+    </React.Fragment>,
 );
