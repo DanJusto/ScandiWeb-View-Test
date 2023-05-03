@@ -17,8 +17,8 @@ export default function Home({prods}) {
   }
   
   window.addEventListener('popstate', e => {
-    //window.location.reload();
     setProducts(prods);
+    window.location.reload();
   })
   
   function checkType(product) {
