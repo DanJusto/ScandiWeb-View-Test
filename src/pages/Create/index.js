@@ -131,12 +131,12 @@ export default function Create({ setProds }) {
         console.log(responseJson)
     });
 
-    /*const res = await api.get(`/`);
+    const res = await api.get(`/`);
     const prods = JSON.parse(res.data.body);
-    setProds(prods);*/
+    setProds(prods);
     
     function backToHome() {
-      //history.back();
+      history.back();
       navigate("/");
     }
     backToHome();
