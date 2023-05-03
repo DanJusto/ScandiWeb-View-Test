@@ -94,7 +94,7 @@ export default function Home({prods}) {
     reload();
   }
 
-  window.addEventListener('load', async () => {
+  /*window.addEventListener('load', async () => {
     const response = await api.get(`/`)
     const listProds = JSON.parse(response.data.body);
     const section = document.querySelector('.section');
@@ -123,44 +123,40 @@ export default function Home({prods}) {
           
       section.appendChild(item);
     });
-  });
-  /*useEffect(() => {
+  });*/
+  useEffect(() => {
     async function fetchProducts() {
-      //const response = await api.get(`/`);
-      fetch("https://scandiweb-api.cloud")
-      .then(response => response.json())
-      .then(responseJson => {
-        const listProds = JSON.parse(responseJson.data.body);
-        const section = document.querySelector('.section');
-        console.log(listProds);
-        listProds.forEach(product => {
-          let item = document.createElement('div')
-          item.setAttribute("class", "item");
-          let checkbox = document.createElement('input');
-          checkbox.setAttribute("type", "checkbox");
-          checkbox.setAttribute("class", "delete-checkbox");
-          checkbox.setAttribute("idfordelete", product.id);
-          let sku = document.createElement('p');
-          let name = document.createElement('p');
-          let price = document.createElement('p');
-          let attribute = document.createElement('p');
-  
-          sku.innerHTML = product.sku;
-          name.innerHTML = product.name;
-          price.innerHTML = product.price;
-          attribute.innerHTML = checkType(product);
-  
-          item.appendChild(checkbox);
-          item.appendChild(sku);
-          item.appendChild(name);
-          item.appendChild(price);
-          item.appendChild(attribute);
-          section.appendChild(item);
-        });
-      });
+      const response = await api.get(`/`)
+      const listProds = JSON.parse(response.data.body);
+      const section = document.querySelector('.section');
+      listProds.forEach(product => {
+        let item = document.createElement('div')
+        item.setAttribute("class", "item");
+        let checkbox = document.createElement('input');
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("class", "delete-checkbox");
+        checkbox.setAttribute("idfordelete", product.id);
+        let sku = document.createElement('p');
+        let name = document.createElement('p');
+        let price = document.createElement('p');
+        let attribute = document.createElement('p');
+    
+        sku.innerHTML = product.sku;
+        name.innerHTML = product.name;
+        price.innerHTML = product.price;
+        attribute.innerHTML = checkType(product);
+    
+        item.appendChild(checkbox);
+        item.appendChild(sku);
+        item.appendChild(name);
+        item.appendChild(price);
+        item.appendChild(attribute);
+            
+        section.appendChild(item);
+      })
     };
     fetchProducts();
-  }, []);*/
+  }, []);
 
   return (
     <Container>
