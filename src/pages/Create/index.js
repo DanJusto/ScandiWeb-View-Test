@@ -80,7 +80,6 @@ export default function Create({ setProds }) {
     if(counter > 0) {
       alert("This SKU is already in use");
     } else {
-      setProds(products);
       handleNewProduct()
     }
 
@@ -130,7 +129,11 @@ export default function Create({ setProds }) {
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson)
-      });
+    });
+
+    const res = await api.get(`/`);
+    const prods = JSON.parse(res.data.body);
+    setProds(prods);
     
     function backToHome() {
       history.back();

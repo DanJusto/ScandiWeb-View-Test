@@ -17,7 +17,8 @@ export default function Home({prods}) {
   }
   
   window.addEventListener('popstate', e => {
-    window.location.reload();
+    //window.location.reload();
+    setProducts(prods);
   })
   
   function checkType(product) {
@@ -59,6 +60,10 @@ export default function Home({prods}) {
     reload();
   }
 
+  /*window.addEventListener('load', async () => {
+    const response = await api.get(`/`);
+    setProducts(JSON.parse(response.data.body));
+  });*/
   useEffect(() => {
     async function fetchProducts() {
       const response = await api.get(`/`);
