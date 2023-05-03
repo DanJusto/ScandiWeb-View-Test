@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: ${({ theme }) => theme.COLORS.DARK_400};
   border-bottom: 2px solid ${({ theme }) => theme.COLORS.LIGHT_300};
   padding: 0 2rem;
   transition: 500ms;

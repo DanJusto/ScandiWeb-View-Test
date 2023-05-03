@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { api } from "../../services/api";
 import { Container, Form } from "./style";
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
@@ -10,7 +11,7 @@ import { TypeDvd } from "../../components/TypeDvd";
 import { TypeBook } from "../../components/TypeBook";
 import { TypeFurniture } from "../../components/TypeFurniture";
 
-export default function Create() {
+export default function Create({ setProds }) {
   const navigate = useNavigate();
   const [sku, setSku] = useState('');
   const [name, setName] = useState('');
@@ -66,9 +67,24 @@ export default function Create() {
     }
 
     const checkSku = sku.toUpperCase();
-    let products;
 
-    fetch("https://scandiweb-api.cloud")
+    let products;
+    const response = await api.get(`/`);
+    products = JSON.parse(response.data.body);
+    let counter = 0;
+    products.forEach(product => {
+      if (checkSku === product.sku) {
+        counter++;
+      }
+    })
+    if(counter > 0) {
+      alert("This SKU is already in use");
+    } else {
+      setProds(products);
+      handleNewProduct()
+    }
+
+    /*fetch("https://scandiweb-api.cloud")
       .then((response) => response.json())
       .then((responseJson) => {
         products = JSON.parse(responseJson.body)
@@ -84,7 +100,7 @@ export default function Create() {
         } else {
           handleNewProduct()
         }
-      });
+      });*/
   }
   async function handleNewProduct() {
     let attr = attribute
@@ -116,7 +132,11 @@ export default function Create() {
         console.log(responseJson)
       });
     
-    navigate("/");
+    function backToHome() {
+      history.back();
+      navigate("/");
+    }
+    backToHome();
   }
 
   useEffect(() => {

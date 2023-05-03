@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 import { Container, Item } from "./style";
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
 
 
-export default function Home() {
+export default function Home({prods}) {
   const [products, setProducts] = useState([]);
 
   const navigate = useNavigate();
@@ -15,7 +16,12 @@ export default function Home() {
     navigate("/add");
   }
   
-   function checkType(product) {
+  window.addEventListener('popstate', e => {
+    console.log(prods)
+    setProducts(prods)
+  })
+  
+  function checkType(product) {
     const arrIndex = ['dvd', 'book', 'furniture'];
     const index = arrIndex.indexOf(product.type);
     const arrExt = ['MB', 'KG', ''];
@@ -56,16 +62,11 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchProducts() {
-      await fetch("https://scandiweb-api.cloud")
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setProducts(JSON.parse(responseJson.body));
-      })
+      const response = await api.get(`/`);
+      setProducts(JSON.parse(response.data.body));
     };
     fetchProducts();
   }, []);
-
-  //useEffect(() => listProducts(products), [products]);
 
   return (
     <Container>
